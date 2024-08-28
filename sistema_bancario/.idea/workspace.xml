@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dd2a84b-d0ad-4cd9-a521-f261f697cf17" name="Changes" comment="kkk vai dar merda">
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SistemaDeVendas/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SistemaDeVendas/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SistemaDeVendas/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SistemaDeVendas/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SistemaDeVendas/src/sistema_vendas/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SistemaDeVendas/src/sistema_vendas/Produto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +44,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/kauan/Desktop/repo python/entregas_27_08/sistema_bancario"
+    "last_opened_file_path": "C:/Users/kauan/Área de Trabalho/Entregas_27_08/SistemaDeVendas"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

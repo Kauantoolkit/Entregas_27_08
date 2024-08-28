@@ -71,4 +71,14 @@ public class Produto {
     private boolean verificarDisponibilidade(int quantidade) {
         return quantidadeEstoque >= quantidade;
     }
+
+
+
+
+
+
+
 }
+
+
+

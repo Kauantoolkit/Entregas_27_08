@@ -6,6 +6,7 @@ import sistema_vendas.Pedido;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
         // Criar um cliente
@@ -30,5 +31,37 @@ public class Main {
         // Exibir informações dos produtos
         produto1.consultarInformacoes();
         produto2.consultarInformacoes();
+
+        // Chamar o menu
+        menu(scanner, pedido);
+    }
+
+    public static void menu(Scanner scanner, Pedido pedido) {
+        int opcao;
+        do {
+            System.out.println("----- Menu -----");
+            System.out.println("1. Exibir Total do Pedido");
+            System.out.println("2. Consultar Informações dos Produtos");
+            System.out.println("3. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Total do Pedido: " + pedido.calcularTotal());
+                    break;
+                case 2:
+                    for (ItemPedido item : pedido.getItens()) {
+                        item.getProduto().consultarInformacoes();
+                    }
+                    break;
+                case 3:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida, tente novamente.");
+                    break;
+            }
+        } while (opcao != 3);
     }
 }

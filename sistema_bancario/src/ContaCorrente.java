@@ -2,19 +2,22 @@ public class ContaCorrente {
     private int numeroConta;
     private String titular;
     private double saldo;
-    private double limiteSaque;
 
     // Construtor
-    public ContaCorrente(int numeroConta, String titular, double saldo, double limiteSaque) {
+    public ContaCorrente(int numeroConta, String titular, double saldo) {
         this.numeroConta = numeroConta;
         this.titular = titular;
-        this.saldo = saldo;
-        this.limiteSaque = limiteSaque;
+        if (saldo >= 0) {
+            this.saldo = saldo;
+        } else {
+            this.saldo = 0;
+            System.out.println("Saldo inicial inválido. Conta criada com saldo 0.");
+        }
     }
 
     // Getters e setters
     public int getNumeroConta() {
-        return numeroConta;
+        return this.numeroConta;
     }
 
     public void setNumeroConta(int numeroConta) {
@@ -22,7 +25,7 @@ public class ContaCorrente {
     }
 
     public String getTitular() {
-        return titular;
+        return this.titular;
     }
 
     public void setTitular(String titular) {
@@ -30,36 +33,43 @@ public class ContaCorrente {
     }
 
     public double getSaldo() {
-        return saldo;
+        return this.saldo;
     }
 
-    public void setSaldo(double saldo) {
+    private void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
-    public double getLimiteSaque() {
-        return limiteSaque;
-    }
-
-    public void setLimiteSaque(double limiteSaque) {
-        this.limiteSaque = limiteSaque;
-    }
-
-    public void depositar(double valor) {
-        saldo += valor;
-        System.out.println("Depósito realizado com sucesso!");
-    }
-
-    public void sacar(double valor) {
-        if (valor <= saldo + limiteSaque) {
-            saldo -= valor;
-            System.out.println("Saque realizado com sucesso!");
+    // Métodos de operação
+    public boolean depositar(double valor) {
+        if (valor > 0) {
+            this.saldo += valor;
+            System.out.println("Depósito realizado com sucesso!");
+            return true;
         } else {
-            System.out.println("Saldo insuficiente.");
+            System.out.println("Valor de depósito inválido.");
+            return false;
+        }
+    }
+
+    public boolean sacar(double valor) {
+        if (valor > 0 && valor <= this.saldo) {
+            this.saldo -= valor;
+            System.out.println("Saque realizado com sucesso!");
+            return true;
+        } else {
+            System.out.println("Saldo insuficiente ou valor inválido.");
+            return false;
         }
     }
 
     public void exibirSaldo() {
-        System.out.println("Saldo atual: " + saldo);
+        System.out.println("Saldo atual: " + this.saldo);
+    }
+
+    public void exibirDetalhesConta() {
+        System.out.println("Número da Conta: " + this.numeroConta);
+        System.out.println("Titular: " + this.titular);
+        System.out.println("Saldo: " + this.saldo);
     }
 }

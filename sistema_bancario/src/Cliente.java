@@ -14,7 +14,7 @@ public class Cliente {
 
     // Getters e setters
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
@@ -22,7 +22,7 @@ public class Cliente {
     }
 
     public String getCpf() {
-        return cpf;
+        return this.cpf;
     }
 
     public void setCpf(String cpf) {
@@ -30,17 +30,24 @@ public class Cliente {
     }
 
     public List<ContaCorrente> getContas() {
-        return contas;
+        return this.contas;
     }
 
-    public void adicionarConta(ContaCorrente conta) {
-        contas.add(conta);
-        System.out.println("Conta adicionada com sucesso!");
+    public boolean adicionarConta(ContaCorrente conta) {
+        if (encontrarContaPorNumero(conta.getNumeroConta()) == null) {
+            this.contas.add(conta);
+            System.out.println("Conta adicionada com sucesso!");
+            return true;
+        } else {
+            System.out.println("Conta já existe.");
+            return false;
+        }
     }
 
     public void exibirContas() {
-        for (ContaCorrente conta : contas) {
-            System.out.println("Conta: " + conta.getNumeroConta() + " - Titular: " + conta.getTitular() + " - Saldo: " + conta.getSaldo());
+        System.out.println("Contas do cliente " + this.nome + ":");
+        for (ContaCorrente conta : this.contas) {
+            conta.exibirDetalhesConta();
         }
     }
 
@@ -62,8 +69,9 @@ public class Cliente {
         }
     }
 
-    private ContaCorrente encontrarContaPorNumero(int numeroConta) {
-        for (ContaCorrente conta : contas) {
+    // Tornar o método público para acesso externo
+    public ContaCorrente encontrarContaPorNumero(int numeroConta) {
+        for (ContaCorrente conta : this.contas) {
             if (conta.getNumeroConta() == numeroConta) {
                 return conta;
             }

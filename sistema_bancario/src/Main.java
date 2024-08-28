@@ -3,161 +3,91 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static List<Cliente> clientes = new ArrayList<>();
-    private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-        boolean continuar = true;
-        while (continuar) {
-            System.out.println("Menu:");
-            System.out.println("1. Criar Cliente");
-            System.out.println("2. Adicionar Conta a um Cliente");
-            System.out.println("3. Depositar em Conta");
-            System.out.println("4. Sacar de Conta");
-            System.out.println("5. Exibir Contas de um Cliente");
-            System.out.println("6. Sair");
+        Scanner scanner = new Scanner(System.in);
 
-            int opcao = scanner.nextInt();
-            scanner.nextLine(); // Consumir o caractere de nova linha
+        // Criar clientes
+        Cliente cliente1 = new Cliente("João Silva", "12345678900");
+        Cliente cliente2 = new Cliente("Maria Oliveira", "98765432100");
+
+        // Criar contas
+        ContaCorrente conta1 = new ContaCorrente(1, "João Silva", 1000.0);
+        ContaCorrente conta2 = new ContaCorrente(2, "Maria Oliveira", 1500.0);
+
+        // Adicionar contas aos clientes
+        cliente1.adicionarConta(conta1);
+        cliente2.adicionarConta(conta2);
+
+        // Lista de clientes
+        List<Cliente> clientes = new ArrayList<>();
+        clientes.add(cliente1);
+        clientes.add(cliente2);
+
+        // Menu de operações
+        menu(scanner, clientes);
+    }
+
+    public static void exibirClientesEContas(List<Cliente> clientes) {
+        System.out.println("Clientes e suas contas:");
+        for (Cliente cliente : clientes) {
+            System.out.println("Cliente: " + cliente.getNome() + " - CPF: " + cliente.getCpf());
+            cliente.exibirContas();
+        }
+    }
+
+    public static void menu(Scanner scanner, List<Cliente> clientes) {
+        int opcao;
+        do {
+            System.out.println("----- Menu -----");
+            System.out.println("1. Depositar em Conta");
+            System.out.println("2. Sacar de Conta");
+            System.out.println("3. Exibir Detalhes de Contas");
+            System.out.println("4. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
 
             switch (opcao) {
                 case 1:
-                    criarCliente();
+                    exibirClientesEContas(clientes);
+                    System.out.print("Digite o número da conta para depósito: ");
+                    int numeroContaDeposito = scanner.nextInt();
+                    System.out.print("Digite o valor do depósito: ");
+                    double valorDeposito = scanner.nextDouble();
+                    realizarOperacaoEmConta(clientes, numeroContaDeposito, valorDeposito, true);
                     break;
                 case 2:
-                    adicionarConta();
+                    exibirClientesEContas(clientes);
+                    System.out.print("Digite o número da conta para saque: ");
+                    int numeroContaSaque = scanner.nextInt();
+                    System.out.print("Digite o valor do saque: ");
+                    double valorSaque = scanner.nextDouble();
+                    realizarOperacaoEmConta(clientes, numeroContaSaque, valorSaque, false);
                     break;
                 case 3:
-                    depositarEmConta();
+                    exibirClientesEContas(clientes);
                     break;
                 case 4:
-                    sacarDeConta();
-                    break;
-                case 5:
-                    exibirContasCliente();
-                    break;
-                case 6:
-                    continuar = false;
                     System.out.println("Saindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    System.out.println("Opção inválida, tente novamente.");
+                    break;
             }
-        }
+        } while (opcao != 4);
     }
 
-    private static void criarCliente() {
-        System.out.println("Digite o nome do cliente:");
-        String nome = scanner.nextLine();
-        System.out.println("Digite o CPF do cliente:");
-        String cpf = scanner.nextLine();
-        Cliente cliente = new Cliente(nome, cpf);
-        clientes.add(cliente);
-        System.out.println("Cliente criado com sucesso!");
-    }
-
-    private static void adicionarConta() {
-        if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
-            return;
-        }
-
-        System.out.println("Digite o CPF do cliente para adicionar a conta:");
-        String cpf = scanner.nextLine();
-        Cliente cliente = encontrarClientePorCpf(cpf);
-
-        if (cliente == null) {
-            System.out.println("Cliente não encontrado.");
-            return;
-        }
-
-        System.out.println("Digite o número da conta:");
-        int numeroConta = scanner.nextInt();
-        scanner.nextLine(); // Consumir o caractere de nova linha
-        System.out.println("Digite o titular da conta:");
-        String titular = scanner.nextLine();
-        System.out.println("Digite o saldo inicial da conta:");
-        double saldo = scanner.nextDouble();
-        System.out.println("Digite o limite de saque da conta:");
-        double limiteSaque = scanner.nextDouble();
-        scanner.nextLine(); // Consumir o caractere de nova linha
-
-        ContaCorrente conta = new ContaCorrente(numeroConta, titular, saldo, limiteSaque);
-        cliente.adicionarConta(conta);
-    }
-
-    private static void depositarEmConta() {
-        if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
-            return;
-        }
-
-        System.out.println("Digite o CPF do cliente:");
-        String cpf = scanner.nextLine();
-        Cliente cliente = encontrarClientePorCpf(cpf);
-
-        if (cliente == null) {
-            System.out.println("Cliente não encontrado.");
-            return;
-        }
-
-        System.out.println("Digite o número da conta para depósito:");
-        int numeroConta = scanner.nextInt();
-        System.out.println("Digite o valor para depósito:");
-        double valor = scanner.nextDouble();
-        scanner.nextLine(); // Consumir o caractere de nova linha
-
-        cliente.depositarEmConta(numeroConta, valor);
-    }
-
-    private static void sacarDeConta() {
-        if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
-            return;
-        }
-
-        System.out.println("Digite o CPF do cliente:");
-        String cpf = scanner.nextLine();
-        Cliente cliente = encontrarClientePorCpf(cpf);
-
-        if (cliente == null) {
-            System.out.println("Cliente não encontrado.");
-            return;
-        }
-
-        System.out.println("Digite o número da conta para saque:");
-        int numeroConta = scanner.nextInt();
-        System.out.println("Digite o valor para saque:");
-        double valor = scanner.nextDouble();
-        scanner.nextLine(); // Consumir o caractere de nova linha
-
-        cliente.sacarDeConta(numeroConta, valor);
-    }
-
-    private static void exibirContasCliente() {
-        if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
-            return;
-        }
-
-        System.out.println("Digite o CPF do cliente:");
-        String cpf = scanner.nextLine();
-        Cliente cliente = encontrarClientePorCpf(cpf);
-
-        if (cliente == null) {
-            System.out.println("Cliente não encontrado.");
-            return;
-        }
-
-        cliente.exibirContas();
-    }
-
-    private static Cliente encontrarClientePorCpf(String cpf) {
+    public static void realizarOperacaoEmConta(List<Cliente> clientes, int numeroConta, double valor, boolean deposito) {
         for (Cliente cliente : clientes) {
-            if (cliente.getCpf().equals(cpf)) {
-                return cliente;
+            ContaCorrente conta = cliente.encontrarContaPorNumero(numeroConta);
+            if (conta != null) {
+                if (deposito) {
+                    conta.depositar(valor);
+                } else {
+                    conta.sacar(valor);
+                }
+                return;
             }
         }
-        return null;
+        System.out.println("Conta não encontrada.");
     }
 }
