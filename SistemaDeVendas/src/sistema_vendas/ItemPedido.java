@@ -1,4 +1,4 @@
-package sistema_vendas;
+package SistemaDeVendas.src.sistema_vendas;
 
 public class ItemPedido {
     private Produto produto;

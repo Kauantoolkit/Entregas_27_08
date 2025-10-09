@@ -1,4 +1,4 @@
-package sistema_vendas;
+package SistemaDeVendas.src.sistema_vendas;
 
 public class Produto {
     private String codigo;
@@ -39,11 +39,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public int getQuantidadeEstoque() {
+    public int getEstoque() {
         return quantidadeEstoque;
     }
 
-    public void setQuantidadeEstoque(int quantidadeEstoque) {
+    public void setEstoque(int quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
@@ -73,7 +73,13 @@ public class Produto {
     }
 
 
+    public String getId() {
+        return this.codigo;
+    }
 
+        public String getNome() {
+        return this.descricao;
+    }
 
 
 

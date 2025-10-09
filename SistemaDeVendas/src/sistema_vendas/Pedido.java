@@ -1,4 +1,4 @@
-package sistema_vendas;
+package SistemaDeVendas.src.sistema_vendas;
 
 import java.util.ArrayList;
 import java.util.List;

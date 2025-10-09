@@ -1,4 +1,4 @@
-package sistema_vendas;
+package SistemaDeVendas.src.sistema_vendas;
 
 public class Cliente {
     private String nome;
